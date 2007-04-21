@@ -4,13 +4,14 @@
 
 Name:           libnfnetlink
 Version:        0.0.16
-Release:        %mkrel 2
+Release:        %mkrel 3
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
 License:        GPL
 URL:            http://www.netfilter.org/projects/%{name}/index.html
 Source0:        http://ftp.netfilter.org/pub/%{name}/%{name}-%{version}.tar.bz2
+Source1:        http://ftp.netfilter.org/pub/%{name}/%{name}-%{version}.tar.bz2.sig
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
