@@ -3,15 +3,15 @@
 %define lib_name        %{lib_name_orig}%{lib_major}
 
 Name:           libnfnetlink
-Version:        0.0.16
-Release:        %mkrel 3
+Version:        0.0.25
+Release:        %mkrel 1
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
 License:        GPL
-URL:            http://www.netfilter.org/projects/%{name}/index.html
-Source0:        http://ftp.netfilter.org/pub/%{name}/%{name}-%{version}.tar.bz2
-Source1:        http://ftp.netfilter.org/pub/%{name}/%{name}-%{version}.tar.bz2.sig
+URL:            http://www.netfilter.org/projects/libnfnetlink/index.html
+Source0:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2
+Source1:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2.sig
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -57,15 +57,15 @@ This package contains the static development files for %{name}.
 %setup -q
 
 %build
-%configure2_5x
-%make
+%{configure2_5x}
+%{make}
 
 %install
 %{__rm} -rf %{buildroot}
-%makeinstall
+%{makeinstall}
 
 %check
-%make check
+%{make} check
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -81,13 +81,11 @@ This package contains the static development files for %{name}.
 
 %files -n %{lib_name}-devel
 %defattr(-,root,root,-)
-%{_includedir}/%{name}
+%{_includedir}/libnfnetlink
 %{_libdir}/*.so
-%{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/pkgconfig/libnfnetlink.pc
 %{_libdir}/*.la
 
 %files -n %{lib_name}-static-devel
 %defattr(-,root,root,-)
 %{_libdir}/*.a
-
-
