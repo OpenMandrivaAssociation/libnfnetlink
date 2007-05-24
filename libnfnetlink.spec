@@ -1,10 +1,10 @@
-%define lib_major       1
+%define lib_major       2
 %define lib_name_orig   %mklibname nfnetlink
 %define lib_name        %{lib_name_orig}%{lib_major}
 
 Name:           libnfnetlink
 Version:        0.0.25
-Release:        %mkrel 1
+Release:        %mkrel 2
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
