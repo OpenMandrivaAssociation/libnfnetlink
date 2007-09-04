@@ -1,10 +1,13 @@
-%define lib_major       0
-%define lib_name_orig   %mklibname nfnetlink
-%define lib_name        %{lib_name_orig}%{lib_major}
+%define major                 0
+%define libname               %mklibname nfnetlink %{major}
+%define libnamedevel          %mklibname nfnetlink -d
+%define libnamedevelold       %{mklibname nfnetlink 0}-devel
+%define libnamestaticdevel    %mklibname nfnetlink -d -s
+%define libnamestaticdevelold %{mklibname nfnetlink 0}-staic-devel
 
 Name:           libnfnetlink
-Version:        0.0.25
-Release:        %mkrel 3
+Version:        0.0.30
+Release:        %mkrel 1
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
@@ -19,38 +22,36 @@ nfnetlink is a netlink(7) based kernel/userspace transport layer. It
 provides a unified kernel/userspace interface for the various netfilter
 subsystems, such as connection tracking, logging and queueing.
 
-%package -n %{lib_name}
+%package -n %{libname}
 Summary:        Main library for %{name}
 Group:          System/Libraries
-Provides:       %{lib_name_orig} = %{epoch}:%{version}-%{release}
 Provides:       %{name} = %{epoch}:%{version}-%{release}
+Provides:       nfnetlink = %{epoch}:%{version}-%{release}
 
-%description -n %{lib_name}
+%description -n %{libname}
 libnfnetlink is a userspace library that provides some low-level
 nfnetlink handling functions. It is used as a foundation for other, netfilter
 subsystem specific libraries such as libnfnetlink_conntrack, libnfnetlink_log
 and libnfnetlink_queue.
 
-%package -n %{lib_name}-devel
+%package -n %{libnamedevel}
 Summary:        Development files for %{name}
 Group:          System/Libraries
-Requires:       %{lib_name} = %{epoch}:%{version}-%{release}
-Provides:       %{lib_name_orig}-devel = %{epoch}:%{version}-%{release}
-Provides:       %{name}-devel = %{epoch}:%{version}-%{release}
-Provides:       lib%{name}-devel = %{epoch}:%{version}-%{release}
+Obsoletes:      %{libnamedevelold} < %{epoch}:%{version}-%{release}
+Provides:       nfnetlink-devel = %{epoch}:%{version}-%{release}
+Requires:       %{libname} = %{epoch}:%{version}-%{release}
 
-%description -n %{lib_name}-devel
+%description -n %{libnamedevel}
 This package contains the development files for %{name}.
 
-%package -n %{lib_name}-static-devel
+%package -n %{libnamestaticdevel}
 Summary:        Static development files for %{name}
 Group:          System/Libraries
-Requires:       %{lib_name}-devel = %{epoch}:%{version}-%{release}
-Provides:       %{lib_name_orig}-static-devel = %{epoch}:%{version}-%{release}
-Provides:       %{name}-static-devel = %{epoch}:%{version}-%{release}
-Provides:       lib%{name}-static-devel = %{epoch}:%{version}-%{release}
+Obsoletes:      %{libnamestaticdevelold} < %{epoch}:%{version}-%{release}
+Provides:       nfnetlink-static-devel = %{epoch}:%{version}-%{release}
+Requires:       %{libnamedevel} = %{epoch}:%{version}-%{release}
 
-%description -n %{lib_name}-static-devel
+%description -n %{libnamestaticdevel}
 This package contains the static development files for %{name}.
 
 %prep
@@ -62,7 +63,7 @@ This package contains the static development files for %{name}.
 
 %install
 %{__rm} -rf %{buildroot}
-%{makeinstall}
+%{makeinstall_std}
 
 %check
 %{make} check
@@ -70,22 +71,22 @@ This package contains the static development files for %{name}.
 %clean
 %{__rm} -rf %{buildroot}
 
-%post -n %{lib_name} -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
 
-%postun -n %{lib_name} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 
-%files -n %{lib_name}
+%files -n %{libname}
 %defattr(-,root,root,-)
 %doc README
 %{_libdir}/*.so.*
 
-%files -n %{lib_name}-devel
+%files -n %{libnamedevel}
 %defattr(-,root,root,-)
 %{_includedir}/libnfnetlink
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libnfnetlink.pc
 %{_libdir}/*.la
 
-%files -n %{lib_name}-static-devel
+%files -n %{libnamestaticdevel}
 %defattr(-,root,root,-)
 %{_libdir}/*.a
