@@ -15,7 +15,6 @@ License:        GPL
 URL:            http://www.netfilter.org/projects/libnfnetlink/index.html
 Source0:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2
 Source1:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2.sig
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 nfnetlink is a netlink(7) based kernel/userspace transport layer. It
