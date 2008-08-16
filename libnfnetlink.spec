@@ -7,7 +7,7 @@
 
 Name:           libnfnetlink
 Version:        0.0.39
-Release:        %mkrel 1
+Release:        %mkrel 2
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
@@ -38,6 +38,7 @@ and libnfnetlink_queue.
 Summary:        Development files for %{name}
 Group:          System/Libraries
 Obsoletes:      %{libnamedevelold} < %{epoch}:%{version}-%{release}
+Obsoletes:	%{mklibname -d nfnetlink 1} < %{epoch}:%{version}-%{release}
 Provides:       nfnetlink-devel = %{epoch}:%{version}-%{release}
 Requires:       %{libname} = %{epoch}:%{version}-%{release}
 
@@ -48,6 +49,7 @@ This package contains the development files for %{name}.
 Summary:        Static development files for %{name}
 Group:          System/Libraries
 Obsoletes:      %{libnamestaticdevelold} < %{epoch}:%{version}-%{release}
+Obsoletes:      %{mklibname -s -d nfnetlink 1} < %{epoch}:%{version}-%{release}
 Provides:       nfnetlink-static-devel = %{epoch}:%{version}-%{release}
 Requires:       %{libnamedevel} = %{epoch}:%{version}-%{release}
 
