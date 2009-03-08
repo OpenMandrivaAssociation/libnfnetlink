@@ -1,12 +1,12 @@
 %define major                 0
-%define libname               %{mklibname nfnetlink %{major}}
-%define libnamedevel          %{mklibname nfnetlink -d}
-%define libnamedevelold       %{mklibname nfnetlink 0}-devel
-%define libnamestaticdevel    %{mklibname nfnetlink -d -s}
-%define libnamestaticdevelold %{mklibname nfnetlink 0}-staic-devel
+%define libname               %mklibname nfnetlink %{major}
+%define libnamedevel          %mklibname nfnetlink -d
+%define libnamedevelold       %mklibname nfnetlink 0-devel
+%define libnamestaticdevel    %mklibname nfnetlink -d -s
+%define libnamestaticdevelold %mklibname nfnetlink 0-static-devel
 
 Name:           libnfnetlink
-Version:        0.0.40
+Version:        0.0.41
 Release:        %mkrel 1
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
@@ -60,15 +60,15 @@ This package contains the static development files for %{name}.
 %setup -q
 
 %build
-%{configure2_5x}
-%{make}
+%configure2_5x
+%make
 
 %install
-%{__rm} -rf %{buildroot}
-%{makeinstall_std}
+%__rm -rf %{buildroot}
+%makeinstall_std
 
 %check
-%{make} check
+%make check
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -84,7 +84,7 @@ This package contains the static development files for %{name}.
 %files -n %{libname}
 %defattr(-,root,root,-)
 %doc README
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{libnamedevel}
 %defattr(-,root,root,-)
