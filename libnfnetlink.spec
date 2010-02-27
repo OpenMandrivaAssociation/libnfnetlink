@@ -6,8 +6,8 @@
 %define libnamestaticdevelold %mklibname nfnetlink 0-static-devel
 
 Name:           libnfnetlink
-Version:        0.0.41
-Release:        %mkrel 2
+Version:        1.0.0
+Release:        %mkrel 1
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
