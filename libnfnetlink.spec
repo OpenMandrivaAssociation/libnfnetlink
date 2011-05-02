@@ -7,7 +7,7 @@
 
 Name:           libnfnetlink
 Version:        1.0.0
-Release:        %mkrel 3
+Release:        %mkrel 4
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
