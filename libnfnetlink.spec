@@ -7,7 +7,7 @@
 
 Name:           libnfnetlink
 Version:        1.0.0
-Release:        %mkrel 4
+Release:        %mkrel 5
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
@@ -73,12 +73,16 @@ This package contains the static development files for %{name}.
 %clean
 %{__rm} -rf %{buildroot}
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
+%if "%{distribution}" == "Mandriva Linux"
+	%if %mdkversion < 200900
+	%post -n %{libname} -p /sbin/ldconfig
+	%endif
 %endif
 
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
+%if "%{distribution}" == "Mandriva Linux"
+	%if %mdkversion < 200900
+	%postun -n %{libname} -p /sbin/ldconfig
+	%endif
 %endif
 
 %files -n %{libname}
