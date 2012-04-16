@@ -7,7 +7,7 @@
 
 Name:           libnfnetlink
 Version:        1.0.0
-Release:        %mkrel 5
+Release:        6
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
@@ -15,7 +15,6 @@ License:        GPL
 URL:            http://www.netfilter.org/projects/libnfnetlink/index.html
 Source0:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2
 Source1:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2.sig
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 nfnetlink is a netlink(7) based kernel/userspace transport layer. It
@@ -64,39 +63,21 @@ This package contains the static development files for %{name}.
 %make
 
 %install
-%__rm -rf %{buildroot}
 %makeinstall_std
 
 %check
 %make check
 
-%clean
-%{__rm} -rf %{buildroot}
-
-%if "%{distribution}" == "Mandriva Linux"
-	%if %mdkversion < 200900
-	%post -n %{libname} -p /sbin/ldconfig
-	%endif
-%endif
-
-%if "%{distribution}" == "Mandriva Linux"
-	%if %mdkversion < 200900
-	%postun -n %{libname} -p /sbin/ldconfig
-	%endif
-%endif
+rm -f %{buildroot}%{_libdir}/*.la
 
 %files -n %{libname}
-%defattr(-,root,root,-)
 %doc README
 %{_libdir}/*.so.%{major}*
 
 %files -n %{libnamedevel}
-%defattr(-,root,root,-)
 %{_includedir}/libnfnetlink
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libnfnetlink.pc
-%{_libdir}/*.la
 
 %files -n %{libnamestaticdevel}
-%defattr(-,root,root,-)
 %{_libdir}/*.a
