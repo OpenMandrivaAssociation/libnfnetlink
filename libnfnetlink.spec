@@ -2,12 +2,10 @@
 %define libname               %mklibname nfnetlink %{major}
 %define libnamedevel          %mklibname nfnetlink -d
 %define libnamedevelold       %mklibname nfnetlink 0-devel
-%define libnamestaticdevel    %mklibname nfnetlink -d -s
-%define libnamestaticdevelold %mklibname nfnetlink 0-static-devel
 
 Name:           libnfnetlink
-Version:        1.0.0
-Release:        6
+Version:        1.0.1
+Release:        1
 Epoch:          0
 Summary:        Userspace library for handling of netfilter netlink messages
 Group:          System/Libraries
@@ -44,21 +42,11 @@ Requires:       %{libname} = %{epoch}:%{version}-%{release}
 %description -n %{libnamedevel}
 This package contains the development files for %{name}.
 
-%package -n %{libnamestaticdevel}
-Summary:        Static development files for %{name}
-Group:          System/Libraries
-Obsoletes:      %{libnamestaticdevelold} < %{epoch}:%{version}-%{release}
-Obsoletes:      %{mklibname -s -d nfnetlink 1} < %{epoch}:%{version}-%{release}
-Provides:       nfnetlink-static-devel = %{epoch}:%{version}-%{release}
-Requires:       %{libnamedevel} = %{epoch}:%{version}-%{release}
-
-%description -n %{libnamestaticdevel}
-This package contains the static development files for %{name}.
-
 %prep
 %setup -q
 
 %build
+autoreconf -fi
 %configure2_5x
 %make
 
@@ -78,9 +66,6 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_includedir}/libnfnetlink
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libnfnetlink.pc
-
-%files -n %{libnamestaticdevel}
-%{_libdir}/*.a
 
 
 %changelog
