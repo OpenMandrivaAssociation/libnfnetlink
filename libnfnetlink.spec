@@ -1,5 +1,3 @@
-%global _disable_rebuild_configure 1
-
 %define major	0
 %define libname	%mklibname nfnetlink %{major}
 %define devname	%mklibname nfnetlink -d
@@ -42,6 +40,12 @@ This package contains the development files for %{name}.
 %setup -q
 
 %build
+%ifarch %{arm} %{armx}
+# Something causes the final link to fail with ld pretending to
+# not understand emulation aarch64linux
+export CC=gcc
+export CXX=g++
+%endif
 %configure
 %make
 
