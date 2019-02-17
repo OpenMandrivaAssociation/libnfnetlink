@@ -1,3 +1,10 @@
+%ifarch %{arm} %{armx}
+# Libtool somehow messes things up, resulting in gold screaming
+# /usr/bin/ld: error: unrecognized emulation aarch64linux
+# Even on aarch64, with ld definitely supporting the right target
+%global optflags %{optflags} -fuse-ld=bfd
+%endif
+
 %define major	0
 %define libname	%mklibname nfnetlink %{major}
 %define devname	%mklibname nfnetlink -d
@@ -38,10 +45,11 @@ This package contains the development files for %{name}.
 
 %prep
 %setup -q
+libtoolize --force
 autoreconf -fi
 
 %build
-%configure2_5x
+%configure
 %make
 
 %install
