@@ -50,6 +50,7 @@ This package contains the development files for %{name}.
 %package -n %{lib32name}
 Summary:        Main library for %{name} (32-bit)
 Group:          System/Libraries
+BuildRequires:       libc6
 
 %description -n %{lib32name}
 libnfnetlink is a userspace library that provides some low-level
@@ -60,7 +61,7 @@ and libnfnetlink_queue.
 %package -n %{dev32name}
 Summary:        Development files for %{name} (32-bit)
 Group:          System/Libraries
-Requires:	%{devname} = %{EVRD}
+Requires:       %{devname} = %{EVRD}
 Requires:       %{lib32name} = %{version}-%{release}
 
 %description -n %{dev32name}
