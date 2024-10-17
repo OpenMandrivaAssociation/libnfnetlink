@@ -18,7 +18,7 @@ Version:	1.0.2
 Release:	2
 Group:          System/Libraries
 License:        GPLv2
-Url:            http://www.netfilter.org/projects/libnfnetlink/index.html
+Url:            https://www.netfilter.org/projects/libnfnetlink/index.html
 Source0:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2
 Source1:        http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-%{version}.tar.bz2.sig
 
